@@ -1,4 +1,4 @@
-user www-data;
+user $NGINX_USER;
 worker_processes auto;
 pid /run/nginx.pid;
 
@@ -63,15 +63,15 @@ http {
 
 	server {
         listen 80  default_server;
-        root /var/www/html;
+        root $NGINX_WEB_ROOT;
 
         location / {
             # try to serve file directly, fallback to app.php
-            try_files $uri /app.php$is_args$args;
+            try_files $uri $NGINX_PHP_FALLBACK$is_args$args;
         }
         # PROD
-        location ~ ^/app\.php(/|$) {
-            fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        location ~ $NGINX_PHP_LOCATION {
+            fastcgi_pass unix:$PHP_SOCK_FILE;
             fastcgi_split_path_info ^(.+\.php)(/.*)$;
             include fastcgi_params;
             # When you are using symlinks to link the document root to the
@@ -96,5 +96,3 @@ http {
         }
     }
 }
-
-

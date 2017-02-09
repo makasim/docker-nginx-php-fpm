@@ -8,5 +8,5 @@ If file not present Nginx proxy a request to PHP-FPM.
 There must be a `app.php` inside the folder.
 
 ```
-docker run --rm -it --env CUSTOM_DIR=/app/web -p 80:80 -v /home/user/app/:/app makasim/nginx-php-fpm
+docker run --rm -it --env NGINX_WEB_ROOT=/app/web -p 80:80 -v /home/user/app/:/app makasim/nginx-php-fpm
 ```

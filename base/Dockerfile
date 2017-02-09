@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 MAINTAINER Kotliar Maksym kotlyar.maksim@gmail.com
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends --no-install-suggests nginx php php-fpm ca-certificates && \
+    apt-get install -y --no-install-recommends --no-install-suggests nginx php php-fpm ca-certificates gettext && \
     rm -rf /var/lib/apt/lists/*
 
 
@@ -14,8 +14,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 RUN rm -f /etc/nginx/sites-enabled/*
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY php-fpm.conf /etc/php/7.0/fpm/pool.d/www.conf
+COPY nginx.conf.tpl /tmp/nginx.conf.tpl
+COPY php-fpm.conf.tpl /tmp/php-fpm.conf.tpl
 
 RUN mkdir -p /run/php && touch /run/php/php7.0-fpm.sock && touch /run/php/php7.0-fpm.pid
 

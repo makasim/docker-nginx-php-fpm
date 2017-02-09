@@ -20,8 +20,8 @@
 ; Unix user/group of processes
 ; Note: The user is mandatory. If the group is not set, the default user's group
 ;       will be used.
-user = www-data
-group = www-data
+user = $PHP_USER
+group = $PHP_GROUP
 
 ; The address on which to accept FastCGI requests.
 ; Valid syntaxes are:
@@ -33,7 +33,7 @@ group = www-data
 ;                            (IPv6 and IPv4-mapped) on a specific port;
 ;   '/path/to/unix/socket' - to listen on a unix socket.
 ; Note: This value is mandatory.
-listen = /run/php/php7.0-fpm.sock
+listen = $PHP_SOCK_FILE
 
 ; Set listen(2) backlog.
 ; Default Value: 511 (-1 on FreeBSD and OpenBSD)
@@ -44,8 +44,8 @@ listen = /run/php/php7.0-fpm.sock
 ; BSD-derived systems allow connections regardless of permissions.
 ; Default Values: user and group are set as the running user
 ;                 mode is set to 0660
-listen.owner = www-data
-listen.group = www-data
+listen.owner = $PHP_USER
+listen.group = $PHP_GROUP
 ;listen.mode = 0660
 ; When POSIX Access Control Lists are supported you can set them using
 ; these options, value is a comma separated list of user/group names.
@@ -413,9 +413,9 @@ pm.max_spare_servers = 3
 ;php_admin_value[memory_limit] = 32M
 
 
-user = www-data
-group = www-data
-listen.owner = www-data
-listen.group = www-data
-listen.mode = 0660
+user = $PHP_USER
+group = $PHP_GROUP
+listen.owner = $PHP_USER
+listen.group = $PHP_GROUP
+listen.mode = $PHP_MODE
 clear_env = no
