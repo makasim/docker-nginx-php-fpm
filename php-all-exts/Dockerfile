@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Kotliar Maksym kotlyar.maksim@gmail.com
+MAINTAINER Maksim Kotliar <kotlyar.maksim@gmail.com>
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests nginx php php-fpm ca-certificates gettext && \
@@ -27,5 +27,7 @@ CMD ["/entrypoint.sh"]
 
 # exts
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends --no-install-suggests php-mongodb php-curl php-intl php-soap php-xml php-mysql php-amqp && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+    php-mongodb php-curl php-intl php-soap php-xml php-mcrypt php-bcmath \
+    php-mysql php-amqp php-mbstring php-ldap php-zip && \
     rm -rf /var/lib/apt/lists/*

@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Kotliar Maksym kotlyar.maksim@gmail.com
+MAINTAINER Maksim Kotliar <kotlyar.maksim@gmail.com>
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests nginx php php-fpm ca-certificates gettext && \
