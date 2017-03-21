@@ -35,3 +35,18 @@ PHP_MODE=           0660
 PHP_FPM_CONF=       /etc/php/7.0/fpm/php-fpm.conf
 ```
 
+## XDebug on Mac
+
+* To enable xdebug mount xdebug configuration file to: `/etc/php/7.0/mods-available/xdebug.ini`  
+* Set fake ip on the docker host: `sudo ifconfig lo0 alias 172.10.0.1`  
+* For PHPStorm set container env: `PHP_IDE_CONFIG: 'serverName=server.loc'` where 'server.loc' - PHPStorm server name  
+
+```ini
+; xdebug.ini
+zend_extension=xdebug.so
+xdebug.profiler_enable = Off
+xdebug.profiler_enable_trigger = Off
+xdebug.max_nesting_level = 5000
+xdebug.remote_enable = On
+xdebug.remote_host = 172.10.0.1
+```
