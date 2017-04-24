@@ -29,5 +29,5 @@ CMD ["/entrypoint.sh"]
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
     php-mongodb php-curl php-intl php-soap php-xml php-mcrypt php-bcmath \
-    php-mysql php-amqp php-mbstring php-ldap php-zip && \
+    php-mysql php-amqp php-mbstring php-ldap php-zip php-imagick && \
     rm -rf /var/lib/apt/lists/*
