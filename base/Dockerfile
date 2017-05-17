@@ -16,6 +16,8 @@ RUN rm -f /etc/nginx/sites-enabled/*
 
 COPY nginx.conf.tpl /tmp/nginx.conf.tpl
 COPY php-fpm.conf.tpl /tmp/php-fpm.conf.tpl
+COPY defaults.ini /etc/php/7.0/cli/conf.d/defaults.ini
+COPY defaults.ini /etc/php/7.0/fpm/conf.d/defaults.ini
 
 RUN mkdir -p /run/php && touch /run/php/php7.0-fpm.sock && touch /run/php/php7.0-fpm.pid
 
