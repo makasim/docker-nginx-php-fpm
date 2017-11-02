@@ -7,13 +7,13 @@ ENV LC_ALL=C.UTF-8
 RUN apt-get update && \
     apt-get -y --no-install-recommends --no-install-suggests install software-properties-common python-software-properties && \
     add-apt-repository ppa:ondrej/php && \
+    add-apt-repository ppa:ondrej/pkg-gearman && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && \
     apt-get remove php7.0 && \
     apt-get install -y --no-install-recommends --no-install-suggests nginx php7.1 php7.1-fpm php7.1-cli php7.1-common ca-certificates gettext && \
     rm -rf /var/lib/apt/lists/*
-
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
