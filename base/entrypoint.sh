@@ -10,7 +10,7 @@ export PHP_SOCK_FILE=${PHP_SOCK_FILE:-'/run/php.sock'}
 export PHP_USER=${PHP_USER:-'www-data'}
 export PHP_GROUP=${PHP_GROUP:-'www-data'}
 export PHP_MODE=${PHP_MODE:-'0660'}
-export PHP_FPM_CONF=${PHP_FPM_CONF:-'/etc/php/7.1/fpm/php-fpm.conf'}
+export PHP_FPM_CONF=${PHP_FPM_CONF:-'/etc/php/7.2/fpm/php-fpm.conf'}
 
 envsubst '${NGINX_WEB_ROOT} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION} ${NGINX_USER} ${NGINX_CONF} ${PHP_SOCK_FILE} ${PHP_USER} ${PHP_GROUP} ${PHP_MODE} ${PHP_FPM_CONF}' < /tmp/nginx.conf.tpl > $NGINX_CONF
 envsubst '${NGINX_WEB_ROOT} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION} ${NGINX_USER} ${NGINX_CONF} ${PHP_SOCK_FILE} ${PHP_USER} ${PHP_GROUP} ${PHP_MODE} ${PHP_FPM_CONF}' < /tmp/php-fpm.conf.tpl > $PHP_FPM_CONF
@@ -22,7 +22,7 @@ nginx -c $NGINX_CONF  -g 'daemon off;' 2>&1 &
 NGINX_PID=$!
 
 echo 'Starting PHP-FPM';
-php-fpm7.1 -R -F -c $PHP_FPM_CONF 2>&1 &
+php-fpm7.2 -R -F -c $PHP_FPM_CONF 2>&1 &
 PHP_FPM_PID=$!
 
 trap "TRAPPED_SIGNAL=true; kill -15 $NGINX_PID; kill -15 $PHP_FPM_PID;" SIGTERM  SIGINT
