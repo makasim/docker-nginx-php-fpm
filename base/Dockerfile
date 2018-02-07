@@ -16,9 +16,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+RUN ln -sf /dev/stderr /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log \
-	&& ln -sf /dev/stderr /var/log/php7.2-fpm.log
+	&& ln -sf /dev/stderr /var/log/php7.2-fpm.log \
+	&& ln -sf /dev/stderr /var/log/php-fpm.log
 
 RUN rm -f /etc/nginx/sites-enabled/*
 

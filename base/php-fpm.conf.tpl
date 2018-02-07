@@ -5,7 +5,9 @@ pm.max_children = 5
 pm.start_servers = 2
 pm.min_spare_servers = 1
 pm.max_spare_servers = 3
+
 clear_env = no
+catch_workers_output=yes
 
 user = $PHP_USER
 group = $PHP_GROUP
