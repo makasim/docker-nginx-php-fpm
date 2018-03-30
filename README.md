@@ -23,8 +23,8 @@ Here's available env vars and their default values:
 
 ```
 NGINX_WEB_ROOT=     /var/www/html
-NGINX_PHP_FALLBACK= /app.php
-NGINX_PHP_LOCATION= ^/app\.php(/|$)
+NGINX_PHP_FALLBACK= /index.php
+NGINX_PHP_LOCATION= ^/index\.php(/|$$)
 NGINX_USER=         www-data
 NGINX_CONF=         /etc/nginx/nginx.conf
 
