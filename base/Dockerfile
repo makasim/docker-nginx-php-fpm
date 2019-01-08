@@ -23,8 +23,9 @@ RUN ln -sf /dev/stderr /var/log/nginx/access.log \
 
 RUN rm -f /etc/nginx/sites-enabled/*
 
-COPY nginx.conf.tpl /tmp/nginx.conf.tpl
-COPY php-fpm.conf.tpl /tmp/php-fpm.conf.tpl
+COPY nginx.conf.tpl /nginx.conf.tpl
+COPY nginx_ssl.conf.tpl /nginx_ssl.conf.tpl
+COPY php-fpm.conf.tpl /php-fpm.conf.tpl
 COPY defaults.ini /etc/php/7.2/cli/conf.d/defaults.ini
 COPY defaults.ini /etc/php/7.2/fpm/conf.d/defaults.ini
 
