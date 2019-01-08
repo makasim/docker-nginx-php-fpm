@@ -51,6 +51,24 @@ xdebug.remote_enable = On
 xdebug.remote_host = 172.10.0.1
 ```
 
+## Enable HTTPS
+
+*Use it only locally.*
+ 
+Generate self-signed certificates:
+
+```
+openssl req -newkey rsa:2048 -sha256 -nodes -keyout YOURPRIVATE.key -x509 -days 365 -out YOURPUBLIC.pem -subj "/C=US/ST=New York/L=Brooklyn/O=Example Brooklyn Company/CN=YOURDOMAIN.EXAMPLE"
+```
+
+Run container with additional env vars:
+
+```
+docker run -d -p443:443 -v `pwd`:/var/www/html -e NGINX_SSL_PUBLIC_CERTIFICATE=/var/www/html/YOURPUBLIC.pem -e NGINX_SSL_PRIVATE_CERTIFICATE=/var/www/html/YOURPRIVATE.key formapro/nginx-php-fpm:latest
+
+curl https://localhost:443 --insecure
+```
+
 ## Developed by Forma-Pro
 
 Forma-Pro is a full stack development company which interests also spread to open source development. 
