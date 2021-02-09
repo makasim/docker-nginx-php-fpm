@@ -1,4 +1,4 @@
-FROM formapro/nginx-php-fpm:8.0-latest
+FROM makasim/nginx-php-fpm:8.0
 
 # exts
 RUN apt-get update && \
