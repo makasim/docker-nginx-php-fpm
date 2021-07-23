@@ -50,5 +50,5 @@ http {
 		location ~ \.php$ {
 		  return 404;
 		}
-    	}
+	}
 }
