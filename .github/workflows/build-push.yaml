@@ -1,7 +1,6 @@
 name: Build and push docker images
 
-on: 
-  pull_request:
+on:
   push:
     branches:
       - master
