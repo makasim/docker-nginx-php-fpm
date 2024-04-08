@@ -1,0 +1,48 @@
+name: Build and push docker images
+
+on: 
+  pull_request:
+  push:
+    branches:
+      - master
+  
+jobs:
+  build-and-push:
+    name: Build and Push docker images for ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3']
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      -
+        name: Build and push base
+        uses: docker/build-push-action@v5
+        with:
+          context: "./${{ matrix.php }}/base"
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ format('amenophis/nginx-php-fpm:{0}{1}', matrix.php, github.event.event_name == 'pull_request' && format('-{0}', github.event.number) || '') }}
+      
+      -
+        name: Build and push php-all-exts
+        uses: docker/build-push-action@v5
+        with:
+          context: "./${{ matrix.php }}/php-all-exts"
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ format('amenophis/nginx-php-fpm:{0}-all-exts{1}', matrix.php, github.event.event_name == 'pull_request' && format('-{0}', github.event.number) || '') }}
